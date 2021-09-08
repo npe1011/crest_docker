@@ -12,7 +12,7 @@ RUN apt update && apt install \
     && rm -rf /var/lib/apt/lists/*
 ENV TZ=Asia/Tokyo
 
-# apt install for Python
+# apt installs
 RUN apt update && apt install -y --no-install-recommends \
     ca-certificates \
     wget \
