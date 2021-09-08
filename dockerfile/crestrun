@@ -1,0 +1,26 @@
+#!/bin/bash
+
+OUTDIR=`pwd`
+JOBNAME=`basename $1 | sed 's/\.[^\.]*$//'`
+LOGFILE=${OUTDIR}/${JOBNAME}_crest.log
+WORKDIR=/tmp/crest_${JOBNAME}_$$
+mkdir -p ${WORKDIR}
+
+# Copy input files
+for ARG in "$@"
+do
+  if [ -f ${ARG} ]; then
+    cp ${ARG} ${WORKDIR}
+  fi  
+done
+
+# Run
+cd ${WORKDIR}
+crest "$@" 2>&1 | tee ${LOGFILE}
+
+# Copy results
+cp -r * ${OUTDIR}
+
+# Clean-up
+cd ${OUTDIR}
+rm -rf ${WORKDIR}
