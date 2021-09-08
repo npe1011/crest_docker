@@ -115,3 +115,40 @@ crestrun init.xyz --cinp const.txt --T 4 --chrg 1 --uhf 0 --ewin 5
 
 のようにすると、それっぽい遷移状態構造のコンフォメーションが得られます。
  
+ 
+ ## Dockerコンテナ（仮想環境）を再度使うとき
+ 
+ 適当にコマンドラインを閉じたあと、また同じコンテナ内で作業したいときは
+ 
+ ```
+ docker attach crest
+ ```
+のようにすればよいです。
+
+WindowsやDocker自体を再起動するなどして、コンテナが止まってるときは
+
+```
+docker start crest
+docker attach crest
+```
+
+とします。コンテナを破棄したいときは
+
+```
+docker stop crest
+docker rm crest
+```
+
+とすればよいです。コンテナを破棄してもイメージが残っていれば再度、
+
+```
+docker run -it -v D:\work:/work --name crest crest
+```
+
+としてコンテナを再作成できます。今存在しているコンテナの一覧は
+
+```
+docker ps -a
+```
+
+で表示できます。
