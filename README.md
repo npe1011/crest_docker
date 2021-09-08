@@ -35,7 +35,7 @@ crest            latest    d9ffafa024a6   1 minutes ago   226MB
 ```
 docker run -it -v D:\work:/work --name crest crest
 ```
-と入力します。 `-v -v D:\work:/work` の部分で、 Windows上の `D:\work` と仮想環境（コンテナ）であるLinux内の `/work` ディレクトリをつなげています。
+と入力します。 `-v D:\work:/work` の部分で、 Windows上の `D:\work` と仮想環境（コンテナ）であるLinux内の `/work` ディレクトリをつなげています。
 コマンドラインに
 
 ```
