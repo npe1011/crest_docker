@@ -67,11 +67,11 @@ crestrun init.xyz OPTIONS
 OPTIONSはcrest実行時の諸々の設定です。詳しくは [https://xtb-docs.readthedocs.io/en/latest/crestcmd.html] を読みましょう。とりあえず設定すべきは、並列計算数、電荷、スピン、エネルギーの閾値くらいかと思います（他はデフォルトで順当なことをしてくれます）。
 ***注意：必ずオプションは初期構造ファイルの後ろにつけてください。*** 
 
-例えば下の例では、並列数4、電荷1、不対電子の数（aスピン-bスピンの数）1、エネルギー閾値 10 kcal/mol になります。xtb や crest ではスピン多重度周りの指定が Gaussianなどと異なるので注意。（閉殻なら `--uhf 0`、二重項の普通のラジカルなら `--uhf 1`、三重項なら `--uhf 2` となります）
+例えば下の例では、並列数4、電荷1、不対電子の数（aスピン-bスピンの数）1、エネルギー閾値 10 kcal/mol になります。xtb や crest ではスピン多重度周りの指定が Gaussianなどと異なるので注意。（閉殻なら `-uhf 0`、二重項の普通のラジカルなら `-uhf 1`、三重項なら `-uhf 2` となります）
 `--T` で指定できる並列計算数（スレッド数）は、使うCPUコアの数を指定しましょう。
 
 ```
-crestrun init.xyz --T 4 --chrg 1 --uhf 1 --ewin 10
+crestrun init.xyz -T 4 -chrg 1 -uhf 1 -ewin 10
 ```
 
 実行すると画面にログが表示されるとともに、init_crest.log に保存されます（この時点ではそれ以外の出力ファイルはwindows上からは見えないコンテナ内の `/tmp` 以下に保存されていきます）。MMと比べて時間はかかりますので気長に待ちましょう。
@@ -100,7 +100,7 @@ $end
 実行するときには次のようにしてこのファイルを読み込ませます（内部ディレクトリへのコピーも勝手にやります）。
 
 ```
-crestrun init.xyz --cinp const.txt --T 4 --chrg 1 --uhf 0 --ewin 5
+crestrun init.xyz -cinp const.txt -T 4 -chrg 1 -uhf 0 -ewin 5
 ```
 
 遷移状態構造のコンフォメーション探索をするときは
