@@ -6,11 +6,16 @@ LOGFILE=${OUTDIR}/${JOBNAME}_crest.log
 WORKDIR=/tmp/crest_${JOBNAME}_$$
 mkdir -p ${WORKDIR}
 
-# Copy input files
+# Copy input files and reference file 
 for ARG in "$@"
 do
   if [ -f ${ARG} ]; then
     cp ${ARG} ${WORKDIR}
+    dos2unix ${ARG} > /dev/null 2>&1
+    REF_FILE=$(sed -n 's/^[[:space:]]*reference=//p' "$ARG")
+    if [ -n "$REF_FILE" ] && [ -f "$REF_FILE" ]; then
+      cp $REF_FILE $WORKDIR
+    fi
   fi  
 done
 
@@ -24,3 +29,4 @@ cp -r * ${OUTDIR}
 # Clean-up
 cd ${OUTDIR}
 rm -rf ${WORKDIR}
+
