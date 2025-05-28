@@ -85,19 +85,20 @@ crestrun init.xyz -T 4 -chrg 1 -uhf 1 -ewin 10
 特定の原子や構造を固定したコンフォメーション探索もできます。これは例えば遷移状態構造のコンフォメーション探索に利用できます。
 [https://xtb-docs.readthedocs.io/en/latest/crestxmpl.html#conformers-of-transition-states] が参考になります。
 例えば 30原子の分子で原子3,5,9,10,11 を拘束するには下記のようなファイルを作ります。ここではこれを `const.txt` として、 `init.xyz` と同じところに置きます。
+さらにinit.xyzをreference.xyzとしてコピーします（中身は同じ。以前のバージョンでは初期構造ファイルと同じでも動きましたが、ver3.0.1だと駄目な場合があるようなのでコピーを作るのを推奨）。
 `$constrain` の下の部分では拘束する原子の番号、その力、および初期構造ファイルを入れます。 `$metadyn` の下には動かす原子（拘束するやつ以外全部）の番号を書きます。
 
 ```
 $constrain
   atoms: 3,5,9-11
   force constant=1.0
-  reference=init.xyz
+  reference=reference.xyz
 $metadyn
   atoms: 1,2,4,6-8,12-30
 $end
 ```
 
-実行するときには次のようにしてこのファイルを読み込ませます（内部ディレクトリへのコピーも勝手にやります）。
+実行するときには次のようにしてこのファイルを読み込ませます（constrainファイルやreferenceファイルの内部ディレクトリへのコピーも勝手にやります）。
 
 ```
 crestrun init.xyz -cinp const.txt -T 4 -chrg 1 -uhf 0 -ewin 5
